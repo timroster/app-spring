@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  namespace: appsody-project
+  name: app-spring
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: docker-registry.default.svc:5000/appsody-project/app-spring
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 8080

@@ -24,14 +24,14 @@ public class MainTests {
 
     @Test
     public void testHealthEndpoint() {
-        ResponseEntity<String> entity = this.restTemplate.getForEntity("/manage/health", String.class);
+        ResponseEntity<String> entity = this.restTemplate.getForEntity("/actuator/health", String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(entity.getBody()).contains("\"status\":\"UP\"");
     }
 
     @Test
     public void testLivenessEndpoint() {
-        ResponseEntity<String> entity = this.restTemplate.getForEntity("/manage/liveness", String.class);
+        ResponseEntity<String> entity = this.restTemplate.getForEntity("/actuator/liveness", String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(entity.getBody()).contains("\"status\":\"UP\"");
     }
@@ -42,7 +42,7 @@ public class MainTests {
         testLivenessEndpoint(); // access a page
 
         @SuppressWarnings("rawtypes")
-        ResponseEntity<Map> entity = this.restTemplate.getForEntity("/manage/metrics", Map.class);
+        ResponseEntity<Map> entity = this.restTemplate.getForEntity("/actuator/metrics", Map.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
 
         Map<String, Object> body = entity.getBody();
@@ -54,7 +54,7 @@ public class MainTests {
     public void testPrometheusEndpoint() {
         testLivenessEndpoint(); // access a page
 
-        ResponseEntity<String> entity = this.restTemplate.getForEntity("/manage/prometheus", String.class);
+        ResponseEntity<String> entity = this.restTemplate.getForEntity("/actuator/prometheus", String.class);
         assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(entity.getBody()).contains("# TYPE jvm_buffer_count_buffers gauge");
     }

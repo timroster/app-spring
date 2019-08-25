@@ -1,0 +1,14 @@
+apiVersion: serving.knative.dev/v1alpha1
+kind: Service
+metadata:
+  name: app-spring
+spec:
+  runLatest:
+    configuration:
+      revisionTemplate:
+        spec:
+          container:
+            image: timrodocker/app-spring:v0.1
+            imagePullPolicy: Always
+            ports:
+            - containerPort: 8080

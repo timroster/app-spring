@@ -1,0 +1,21 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  name: app-spring
+spec:
+  stack: java-spring-boot2
+  applicationImage: timrodocker/app-spring:v0.1
+  pullPolicy: Always
+  env:
+  - name: SPRING_PROFILES_ACTIVE
+    value: "mysql"
+  - name: SPRING_DATASOURCE_URL
+    value: "jdbc:mysql://db/petclinic"
+  - name: SPRING_DATASOURCE_USERNAME
+    value: "root"
+  - name: SPRING_DATASOURCE_PASSWORD
+    value: "petclin1c"
+  service:
+    type: ClusterIP
+    port: 8080
+  expose: true

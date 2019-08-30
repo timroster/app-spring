@@ -4,6 +4,10 @@ metadata:
   namespace: appsody-project
   name: app-spring
 spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
   runLatest:
     configuration:
       revisionTemplate:

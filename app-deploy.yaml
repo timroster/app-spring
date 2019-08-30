@@ -3,6 +3,10 @@ kind: Service
 metadata:
   name: app-spring
 spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: "1"
   runLatest:
     configuration:
       revisionTemplate:
